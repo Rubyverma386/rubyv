@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:white;overflow-x:hidden;}
+
+/* LOADER */
+.loader{
+position:fixed;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:999;font-size:28px;color:pink;
+}
+
+/* SECTION */
+section{
+min-height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;padding:30px;text-align:center;
+}
+
+/* BUTTON */
+.btn{
+margin-top:20px;padding:12px 30px;border:none;border-radius:30px;background:#ff2e63;color:white;cursor:pointer;transition:0.3s;
+}
+.btn:hover{transform:scale(1.1);}
+
+/* HERO */
+.hero h1{
+font-family:'Great Vibes';font-size:65px;color:#ff9acb;text-shadow:0 0 20px #ff2e63,0 0 40px #ff2e63;
+}
+h2{text-shadow:0 0 10px #ff2e63;}
+
+/* HEART */
+.heartBtn{
+font-size:50px;width:120px;height:120px;background:#ff2e63;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:pulse 1.5s infinite;
+}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
+
+/* CHAT */
+.chat{
+width:90%;max-width:400px;background:#111;padding:15px;border-radius:15px;
+}
+.msg{padding:10px;margin:5px;border-radius:10px;max-width:70%;}
+.left{background:#333;}
+.right{background:#ff2e63;margin-left:auto;}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.08);padding:30px;border-radius:20px;max-width:700px;line-height:1.8;
+}
+
+/* ENVELOPE */
+.envelope{
+width:220px;height:150px;background:#ff2e63;position:relative;cursor:pointer;border-radius:5px;margin-top:20px;
+}
+.flap{
+position:absolute;width:100%;height:100%;background:#e0245e;clip-path:polygon(0 0,100% 0,50% 50%);transition:0.6s;
+}
+
+/* FULL PAGE LETTER */
+.letterPage{
+position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000,#1a1a2e);
+display:flex;justify-content:center;align-items:center;transform:scale(0);opacity:0;transition:0.6s ease-in-out;z-index:999;
+}
+.showLetterPage{transform:scale(1);opacity:1;}
+.letterContent{background:white;color:black;padding:30px;border-radius:15px;max-width:700px;height:80%;overflow:auto;font-size:18px;line-height:1.8;box-shadow:0 0 40px rgba(255,0,100,0.6);}
+.closeBtn{position:absolute;top:20px;right:30px;background:#ff2e63;color:white;border:none;border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;box-shadow:0 0 10px #ff2e63;transition:0.3s;}
+.closeBtn:hover{transform:scale(1.2);}
+
+/* GALLERY */
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;}
+.gallery img{width:180px;height:220px;object-fit:cover;margin:10px;border-radius:15px;transition:0.4s;cursor:pointer;box-shadow:0 10px 20px rgba(0,0,0,0.5);}
+.gallery img:hover{transform:scale(1.15) rotate(2deg);}
+
+/* FLOATING HEARTS & BUBBLES (full page) */
+.floating-bg {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none; /* clicks pass through */
+  z-index:-1; /* behind everything */
+  overflow:hidden;
+}
+
+.heart, .bubble {
+  position:absolute;
+  bottom:-50px; /* start from bottom */
+  font-size:20px;
+  opacity:0;
+  animation:floatUp linear infinite;
+}
+
+.heart {
+  color:#ff2e63;
+}
+
+.bubble {
+  width:12px;
+  height:12px;
+  background:rgba(255,255,255,0.3);
+  border-radius:50%;
+}
+
+@keyframes floatUp {
+  0% {transform:translateY(0) scale(0.5); opacity:0;}
+  25% {opacity:0.8;}
+  50% {opacity:1; transform:translateY(-40vh) scale(1);}
+  75% {opacity:0.8;}
+  100% {transform:translateY(-100vh) scale(1.2); opacity:0;}
+}
+
+
+#finalMsg{font-size:22px;max-width:700px;line-height:1.8;text-shadow:0 0 10px #ff2e63;}
+.countdown{font-size:40px;color:#ff2e63;}
+
+
+/* VALENTINE SECTION */
+#valentine{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:30px;
+  text-align:center;
+  background:linear-gradient(135deg,#302b63,#0f0c29);
+  color:white;
+}
+
+.valentine-options{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+}
+
+.valBtn{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff2e63;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.valBtn:hover{
+  transform:scale(1.1);
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility:hidden;
+  opacity:0;
+  transition:0.3s;
+  z-index:1000;
+}
+
+.popup.show{
+  visibility:visible;
+  opacity:1;
+}
+
+.popup-content{
+  background:white;
+  color:black;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  max-width:400px;
+  box-shadow:0 0 20px rgba(255,0,100,0.6);
+}
+
+.popup-content button{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff2e63;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+.popup-content button:hover{
+  transform:scale(1.1);
+}
+
+ #confessImg {
+    max-width:300px;
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(255,0,100,0.6);
+    margin-top:20px;
+    margin-bottom:20px;
+    animation: fadeIn 1s ease forwards;
+    opacity:0;
+  }
+
+  @keyframes fadeIn {
+    to { opacity:1; }
+  }
+</style>
+</head>
+<body>
+<div class="floating-bg" id="bg"></div>
+<div class="loader" id="loader">Loading Love ❤️...</div>
+
+<section id="songStart" style="min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:linear-gradient(135deg,#ff9acb,#ff2e63); color:white; text-align:center;">
+  <h1 style="font-family:'Great Vibes'; font-size:60px; text-shadow:0 0 20px #fff;">Our Song ❤️</h1>
+  <p style="margin:20px 0; font-size:20px; line-height:1.6;">
+  Baby 💖, jaise hi "Tum Ho" bajta hai, har beat mujhe tumhari yaadon ke kareeb le aata hai 🌸.<br>
+  Tum meri zindagi ka wo hissa ho jo har din ko roshan karta hai ✨.<br>
+  Ye gaana hamari mohabbat ki ek chhoti si kahani hai, jo har dhadkan ke saath zinda hoti hai 💫.<br>
+  Tum meri khushi, meri shanti aur meri duniya ho 🥰.<br>
+  Har line aur har note mujhe yaad dilata hai ke tum ho… meri forever, meri baby ❤️🎵.
+  </p>
+  <button class="btn" id="playSongBtn">Play Song 🎶</button>
+  <button class="btn" id="nextToCountdown" style="display:none; margin-top:20px;" onclick="next('countdown')">Next ⏳</button>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown" style="min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:linear-gradient(135deg,#0f0c29,#302b63,#24243e); color:white; text-align:center;">
+  <h2>Countdown ⏳</h2>
+  <div class="countdown" id="count"></div>
+  <button class="btn" onclick="next('enterName')">Continue 🎉</button>
+</section>
+
+<!-- AUDIO -->
+<audio id="song" loop>
+  <source src="tum-ho.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 2. ENTER NAME -->
+<section id="enterName">
+  <h2>Enter Your Name 💖</h2>
+  <input type="text" id="username" placeholder="Your Name..." style="padding:10px;border-radius:10px;border:none;">
+  <br><br>
+  <button class="btn" onclick="saveName()">Enter ❤️</button>
+</section>
+
+<!-- 3. HERO -->
+<section class="hero" id="hero">
+  <h1 id="heroText">Happy Birthday ❤️</h1>
+  <p>You are my everything 💕</p>
+  <button class="btn" onclick="next('memories')">Continue 🎉</button>
+</section>
+
+<!-- 4. MEMORIES -->
+<section id="memories">
+  <h2>Memories aur Baby apse Milne ka dil 💌</h2>
+  <div class="card" style="background:rgba(255,255,255,0.08);padding:20px;border-radius:15px;max-width:600px;line-height:1.6;">
+    <p>Baby ❤️, yaad hai humari pehli video call? 😍</p>
+    <p>Us pal laga jaise tum mere samne hi ho 🌸.</p>
+    <p>Har smile, har laugh, har “Hi baby” mujhe itna close feel karata tha 💫.</p>
+    <p>Socha ki kitna maza hoga jab hum finally real me milenge ✨.</p>
+    <p>Ye chhoti si video call bhi humari yaadon ka ek priceless hissa hai 🌙.</p>
+    <p>Bas counting kar rahi hoon us din ka jab hum real me saath honge 💖.</p>
+  </div> <!-- closing card div -->
+  
+  <div class="gallery">
+    <img src="1.jpeg">
+    <img src="2.jpeg">
+    <img src="3.jpeg">
+    <img src="4.jpeg">
+    <img src="5.jpeg">
+    <img src="6.jpeg">
+  </div>
+  
+  <button class="btn" onclick="next('heart')">Next ❤️</button>
+</section> <!-- closing memories section -->
+<!-- 5. HEART CLICK -->
+<section id="heart">
+  <h2>Tap My Heart ❤️</h2>
+  <p id="heartText">Click slowly 💕</p>
+  <div class="heartBtn" onclick="heartClick()">💖</div>
+</section>
+
+<!-- 6. TYPING MESSAGE -->
+<section id="message">
+  <div class="card">
+    <p id="typing"></p>
+  </div>
+</section>
+
+<!-- 7. CHAT SECTION (Added) -->
+<section id="chatSection">
+  <h2>Our Story 💬</h2>
+  <div class="chat" id="chatBox"></div>
+  <button class="btn" onclick="startChat()">Open Chat ❤️</button>
+</section>
+
+<!-- 8. LOVE LETTER -->
+<section id="letter">
+  <h2>Love Letter 💌</h2>
+  <div class="envelope" onclick="openLetter()">
+    <div class="flap"></div>
+  </div>
+</section>
+
+<!-- FULL SCREEN LETTER -->
+<div class="letterPage" id="letterPage">
+  <button class="closeBtn" onclick="closeLetter()">✖</button>
+  <div class="letterContent">
+    <p id="letterText"></p>
+  </div>
+</div>
+
+<!-- 9. FINAL MESSAGE -->
+<section id="finalMsgSection">
+  <h2>Final Message ❤️</h2>
+  <p id="finalMsg"></p>
+</section>
+
+<!-- VALENTINE PROPOSAL -->
+<section id="valentine">
+  <h2>Will you be my Valentine forever? 💘</h2>
+  <div class="valentine-options">
+    <button class="valBtn">Yes 💕</button>
+    <button class="valBtn">Of course ❤️</button>
+    <button class="valBtn">Always 💖</button>
+  </div>
+</section>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <p>I love you baby ❤️</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<section id="confession" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:30px;">
+  <h2>thanku baby for coming in my life🐼</h2>
+  <!-- Confession Photo -->
+  <img src="7.jpeg" alt="Confession Photo" id="confessImg" 
+       style="max-width:300px;width:100%;border-radius:15px;box-shadow:0 0 20px rgba(255,0,100,0.6);margin:20px 0;opacity:0;transition:opacity 1s;">
+  <!-- Confession Text -->
+  <p id="confessText" style="max-width:600px;line-height:1.8;font-size:18px;"></p>
+</section>
+
+<!-- 11. SECRET -->
+<section id="secret" style="display:none;">
+  <h2>Secret 🔐</h2>
+  <p>You found it 😭❤️</p>
+</section>
+
+<script>
+// LOADER
+window.onload = () => {
+  setTimeout(()=>loader.style.display="none", 2000);
+  let name = localStorage.getItem("name");
+  if(name) heroText.innerHTML="Happy Birthday "+name+" ❤️";
+}
+// SONG START LOGIC
+let playBtn = document.getElementById("playSongBtn");
+let nextBtn = document.getElementById("nextToCountdown");
+let song = document.getElementById("song");
+
+playBtn.addEventListener("click", ()=>{
+  song.play();
+  playBtn.style.display="none"; // hide play button
+  nextBtn.style.display="inline-block"; // show next button
+});
+
+// COUNTDOWN
+let target = new Date("April 7, 2026 00:00:00").getTime();
+setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = target - now;
+  let d = Math.floor(diff/(1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+  count.innerHTML=`${d}d ${h}h ${m}m ${s}s`;
+},1000);
+
+// NAV
+function next(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+// SAVE NAME
+function saveName(){
+  let name = document.getElementById("username").value;
+  if(!name.trim()){alert("Enter your name ❤️"); return;}
+  localStorage.setItem("name",name);
+  heroText.innerHTML="Happy Birthday "+name+" ❤️";
+  next('hero');
+}
+
+// HEART CLICK
+let msgs=[
+"You are my world ❤️","My happiness 💕","My everything ✨","You are my peace 💫",
+"My safe place 🥺","My forever 💖","You complete me ❤️","My heartbeat 💓",
+"My reason to smile 😊","My dream come true 🌙","My strongest support 💪",
+"My favorite person 💕","My whole universe 🌍","My love, always ❤️","My everything… always 💖"
+];
+let i=0;
+function heartClick(){
+  let heartText = document.getElementById("heartText");
+  if(i<msgs.length) heartText.innerHTML=msgs[i++];
+  else next('message'), typeText();
+}
+
+// TYPING MESSAGE
+let text = `Happy Birthday ❤️
+
+Today is not just your birthday...
+It’s the day when the most beautiful soul came into this world.
+
+Sometimes I sit quietly and think...
+Out of all the people in this world,
+how did I get so lucky to have YOU?
+
+You are not just someone I love...
+You are my peace when everything feels heavy,
+my happiness when life feels empty,
+and my strength when I feel weak.
+
+There are days when I can’t express what I feel,
+but deep inside, I know one thing...
+I never want to lose you.
+
+You stayed when things were hard,
+you understood me when no one else did,
+and you loved me even when I wasn’t perfect.
+
+And trust me...
+that means more than anything in this world.
+
+You are not just part of my life...
+You are my whole world.
+
+Every smile of yours matters to me,
+every little moment with you means everything.
+
+If I could give you anything today,
+I would give you the ability to see yourself
+through my eyes...
+
+Because then you would realize
+how special, how rare, how beautiful you truly are ❤️
+
+No matter what happens in life,
+no matter where life takes us...
+
+One thing will always remain constant —
+My love for you.
+
+I don’t just love you for today,
+I choose you every single day...
+
+Again and again...
+Without any doubt.
+
+Happy Birthday once again ❤️
+You are my forever... 💖`;
+let j=0;
+function typeText(){
+  typing.innerHTML="";
+  j=0;
+  next('message');
+  function t(){if(j<text.length){typing.innerHTML+=text[j++];setTimeout(t,30);}else next('chatSection');}
+  t();
+}
+
+// CHAT
+function startChat(){
+  let arr=[
+     "You are not just my love… you are my entire world ❤️",
+    "When I look at you… I see my forever 💕",
+    "You make my darkest days feel bright ✨",
+    "Your smile is my biggest happiness 😊",
+    "I never believed in perfect… until I met you 💖",
+    "You are the reason I wake up smiling every day ☀️",
+    "Even silence feels beautiful with you 🥺",
+    "I don’t just want you… I need you ❤️",
+    "You are my peace in chaos 💫",
+    "My heart feels safe with you 💞",
+    "Every moment with you feels like a dream 🌙",
+    "I can’t imagine my life without you 😭",
+    "You are my favorite person… always 💕",
+    "You are the best thing that ever happened to me ❤️",
+    "I wish I could stop time when I am with you ⏳",
+    "You are my today, my tomorrow, my forever 💖"
+  ];
+  let i=0;
+  function show(){if(i<arr.length){
+    let d=document.createElement("div");
+    d.className="msg "+(i%2?"right":"left");
+    d.innerHTML=arr[i++];
+    chatBox.appendChild(d);
+    setTimeout(show,1000);
+  } else next('letter');}
+  show();
+}
+
+// LOVE LETTER
+let letterMsg = `Happy Birthday baby meri jaan mere pokiee mere patipareshmar❤️
+
+Jab se hum mile hai, meri duniya hi badal gayi hai baby 💖
+Har pal tumhare saath jaise sapne mein ho 🌸
+Tumhari muskaan meri happiness ka reason hai 😊
+Aur tumhara saath meri duniya ka sabse beautiful feeling hai 💫
+
+Tum sirf meri mohabbat nahi ho...
+Tum meri shanti ho, meri smile ho, meri duniya ho 🌍❤️
+
+Kabhi kabhi main sochti hoon baby...
+Ke kaise itni lucky ho gayi ki tum meri zindagi mein ho 🥰
+
+Tumne har mushkil waqt mein mera haath pakda,
+Mujhe samjha jab koi nahi samjha,
+Aur mujhe chaha bina condition ke 💞
+
+Tumhari har smile meri duniya roshan karti hai 🌟
+Aur tumhare saath har pal mere liye priceless hai 💖
+
+Agar main tumhe aaj kuch bhi de sakti...
+To main tumhe apni nazar se khud ko dekhne ki ability deti 😍
+Taaki tum samajh sako ke tum kitne special, rare aur beautiful ho ❤️
+
+Zindagi mein jo bhi ho, kahin bhi ho...
+Ek cheez hamesha constant rahegi —
+Meri mohabbat tumhare liye 💓
+
+Main sirf aaj ke liye nahi,
+Main har din tumhe choose karti hoon,
+Again and again... bina kisi doubt ke 💕
+
+Happy Birthday once again ❤️
+Meri forever... meri baby ❤️`;
+
+let x = 0;
+
+// Open letter and start typing
+function openLetter() {
+  document.getElementById("letterPage").classList.add("showLetterPage");
+  typeLetter();
+}
+
+// Typing effect for letter
+function typeLetter() {
+  let el = document.getElementById("letterText");
+  if (x < letterMsg.length) {
+    el.innerHTML += letterMsg[x++];
+    setTimeout(typeLetter, 30);
+  }
+  // ❌ showFinal is removed from here
+}
+
+// Close letter and trigger final message
+function closeLetter() {
+  document.getElementById("letterPage").classList.remove("showLetterPage");
+  document.getElementById("letterText").innerHTML = "";
+  x = 0;
+
+  // ✅ trigger final message only after letter is closed
+  showFinal();
+}
+
+// FINAL MESSAGE
+let finalText= `Baby you kwon what❤️,
+
+apke bina lagta hai adhoora sa,
+Har pal apse hi hai poora sa 💖
+
+apke chehre ki muskaan meri zindagi ka noor hai 🌸
+apki baatein meri duniya ka sukoon hai 💫
+
+Har raat apki yaadon mein kho jaati hoon,
+Aur har subah sirf apke liye jeeti hoon 🥰
+
+aap meri shayari ka har lafz ho,
+Meri har dhadkan ka har ehsaas ho ❤️
+
+apke saath hoon toh har pal suhana hai,
+apke bina sab kuch feeka sa lagta hai 💞
+
+meri duniya, meri mohabbat, meri baby...
+Main hamesha tumhare saath hoon, har waqt 💕✨`;
+let z=0;
+function showFinal(){
+  next('finalMsgSection');
+  finalMsg.innerHTML="";
+  z=0;
+  function t(){if(z<finalText.length){finalMsg.innerHTML+=finalText[z++];setTimeout(t,40);}else startHearts(),setTimeout(typeConfession,1000);}
+  t();
+}
+
+
+
+// VALENTINE BUTTONS
+let valBtns = document.querySelectorAll(".valBtn");
+let popup = document.getElementById("popup");
+
+valBtns.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    popup.classList.add("show");
+  });
+});
+
+// CLOSE POPUP
+function closePopup(){
+  popup.classList.remove("show");
+  // optional: scroll to valentine section after closing
+  document.getElementById("valentine").scrollIntoView({behavior:'smooth'});
+}
+
+// SECRET
+document.body.addEventListener("dblclick",()=>{
+  secret.style.display="flex";
+  secret.scrollIntoView({behavior:'smooth'});
+});
+
+let bg = document.getElementById("bg");
+
+let conf = `Baby 💖,
+
+I don’t know what the future holds…
+But I know one thing for sure —
+My heart belongs to you, always ❤️`;
+
+function typeConfession() {
+  const confessEl = document.getElementById("confessText");
+  const imgEl = document.getElementById("confessImg");
+
+  let k = 0;
+  confessEl.innerHTML = "";
+  imgEl.style.opacity = 0;
+
+  // Scroll to section
+  document.getElementById("confession").scrollIntoView({behavior:'smooth'});
+
+  // Image fade-in
+  setTimeout(() => {
+    imgEl.style.opacity = 1;
+  }, 300);
+
+  // Typing text
+  setTimeout(() => {
+    function typeLetter() {
+      if (k < conf.length) {
+        confessEl.innerHTML += (conf[k] === "\n") ? "<br>" : conf[k];
+        k++;
+        setTimeout(typeLetter, 40);
+      }
+    }
+    typeLetter();
+  }, 700);
+}
+
+// Heart generator
+setInterval(() => {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (15 + Math.random()*35) + "px";
+  h.style.animationDuration = (5 + Math.random()*5) + "s";
+  bg.appendChild(h);
+  setTimeout(()=>h.remove(), 10000); // remove after animation
+}, 300);
+
+// Bubble generator
+setInterval(() => {
+  let b = document.createElement("div");
+  b.className = "bubble";
+  b.style.left = Math.random() * 100 + "vw";
+  let size = 5 + Math.random()*15;
+  b.style.width = size + "px";
+  b.style.height = size + "px";
+  b.style.animationDuration = (6 + Math.random()*6) + "s";
+  bg.appendChild(b);
+  setTimeout(()=>b.remove(), 12000);
+}, 250);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatroom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="chat-container">
+  <h2>💬 Chatroom</h2>
+
+  <!-- Username -->
+  <input id="username" type="text" placeholder="Enter your name..." />
+
+  <!-- Messages -->
+  <div id="messages"></div>
+
+  <!-- Input -->
+  <div class="input-area">
+    <input id="messageInput" type="text" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="code.js"></script>
+
+</body>
+</html>

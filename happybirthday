@@ -1,0 +1,11 @@
+<section id="confession" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:30px;">
+  
+  <h2>One Last Thing 💔</h2>
+
+  <!-- Photo -->
+  <img src="7.jpeg" id="confessImg">
+
+  <!-- Text -->
+  <p id="confessText"></p>
+
+</section>
